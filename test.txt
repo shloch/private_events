@@ -1,0 +1,13 @@
+users
+ -id
+ -username
+ -email
+ -password_digest
+ -
+
+events
+ -name
+ -user_id
+ -location
+ -eventdate
+
