@@ -8,12 +8,13 @@
           <% end %>
         </li>
         <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "All Posts", "/posts/" %></li>        
+             
          <% if current_user() != nil %>
-            <li>
-              <%= link_to "Create Post", "/posts/new" %>
-              <%= link_to "Log out", logout_path, method: :delete %>
-            </li>         
+            
+              <li><%= link_to "My_Created_Events", "/users/#{current_user().id}" %> </li> 
+              <li><%= link_to "Creat Event", "/events/new" %>  </li>
+              <li><%= link_to "View_all_Events", "/events/index" %></li>
+              <li><%= link_to "Log out", logout_path, method: :delete %> </li>
         <% else %>
           <li><%= link_to "New User", "/users/new" %></li>
           <li><%= link_to "Sign in", signin_path %></li>

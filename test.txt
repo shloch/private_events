@@ -11,3 +11,57 @@ events
  -location
  -eventdate
 
+
+
+
+ # app/models/event.rb
+  class Post < ActiveRecord::Base
+    has_many :attended_events_tbl, foreign_key: :event_attended_id
+    has_many :event_attendee, through: :attended_events_tbl
+
+   ==> belongs_to :creator, class_name: "User"
+  end
+
+
+  # app/models/user.rb
+  class User < ActiveRecord::Base
+    has_many :attended_events_tbl, foreign_key: :event_attendee_id
+    has_many :event_attended, through: :attended_events_tbl
+
+  ==>  has_many :created_events, foreign_key: :creator_id, class_name: "Event"
+  end
+
+
+
+  # app/models/attended_events_tbl.rb
+  class attended_events_tbl < ActiveRecord::Base
+    belongs_to :event_attendee, class_name: "User"
+    belongs_to :event_attended, class_name: "Event"
+  end
+
+
+===================================================================================
+
+teachers (bob1, bob2)
++id
++name
+
+
+student (liza, lizet)
++id
++name
+
+subjects
++teachers_id
++student_id
+
+==> (teacher_id = bob1_id; student_id=liza_id)
+==> (teacher_id = bob1_id; student_id=lizet_id)
+
+
+
+
+
+
+
+

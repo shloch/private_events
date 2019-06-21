@@ -1,0 +1,22 @@
+<h1>Create Event</h1>
+
+
+
+<% provide(:title, 'Create Event') %>
+<% provide(:button_text, 'Create event') %>
+
+<%= form_for(@event) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label "Event name" %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :location %>
+  <%= f.text_field :location, class: 'form-control' %>
+
+  <%= f.label :eventdate %>
+  <%= f.datetime_field :eventdate, class: 'form-control' %>
+
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>
