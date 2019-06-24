@@ -1,9 +1,8 @@
 class User < ApplicationRecord
 
-   has_many :attended_events_tbl, foreign_key: :event_attendee_id
-    has_many :event_attended, through: :attended_events_tbl
-
-    has_many :created_events, foreign_key: :creator_id, class_name: "Event"
+   has_many :attended_events_tbl, foreign_key: :attendee_id
+   has_many :attended_events, through: :attended_events_tbl
+   has_many :created_events, foreign_key: :creator_id, class_name: "Event"
 
     attr_accessor :remember_token    
     before_create :create_remember_digest
@@ -38,6 +37,14 @@ class User < ApplicationRecord
         digest = send("#{attribute}_digest")
         return false if digest.nil?
         digest == Digest::SHA1.hexdigest(token)
+    end
+
+    def upcoming_events(user)
+        user.attended_events.select(:name).where("eventdate >= ?", Time.current) 
+    end
+  
+    def previous_events(user)
+        user.attended_events.select(:name).where("eventdate < ?", Time.current) 
     end
 
 
