@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
   def index
-      #@events = Event.all.paginate(page: params[:page])
       @upcoming_events = Event.upcoming
       @past_events = Event.past
   end

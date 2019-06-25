@@ -12,13 +12,6 @@ class AttendedEventsController < ApplicationController
   end
 
   private 
-    def logged_in_user
-      unless logged_in?
-        flash[:danger] = "Please log in."
-        redirect_to signin_url
-      end
-    end
-
     def check_subscription_status
         @event = params[:event]
         @user = current_user().id
