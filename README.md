@@ -1,24 +1,48 @@
-# README
+# PRIVATE EVENTS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Building a site similar to a private *Eventbrite* which allows users to create events and then manage user signups(Event subscriptions). Users can create events and send invitations and parties
 
-Things you may want to cover:
+## DESCRIPTION
 
-* Ruby version
+There're 3 main models for the app's functionality
+- **Event** : Events CRUD functionalities are managed here
+- **User** : Users accounts are managed here (account creation, sessions, creation of owned events too)
+- **Attended_events_tbl** : With "EVENT" and "USER" having a many-to-many relationship, this third model serves as a 'helper' table to manage this relationship. It primarily contains data that logs which events a user is an attendee.
 
-* System dependencies
+The association relationship of these 3 models is shown below: 
 
-* Configuration
+```
+# app/models/event.rb
+  class Post < ActiveRecord::Base
+    has_many :attended_events_tbl, foreign_key: :attended_event_id
+    has_many :attendee, through: :attended_events_tbl
 
-* Database creation
+    belongs_to :creator, class_name: "User"
+  end
 
-* Database initialization
 
-* How to run the test suite
+  # app/models/user.rb
+  class User < ActiveRecord::Base
+      has_many :attended_events_tbl, foreign_key: :attendee_id
+      has_many :attended_events, through: :attended_events_tbl
 
-* Services (job queues, cache servers, search engines, etc.)
+      has_many :created_events, foreign_key: :creator_id, class_name: "Event"
+  end
 
-* Deployment instructions
 
-* ...
+
+  # app/models/attended_events_tbl.rb
+  class attended_events_tbl < ActiveRecord::Base
+      belongs_to :attendee, class_name: "User"
+      belongs_to :attended_event, class_name: "Event"
+  end
+```
+
+
+There's a SESSION_CONTROLLER to manage sessions. Many helper functions to assist the session controller file is found in the **application_controller** file
+
+
+## Contributors
+
+- Louis SHEY _https://github.com/shloch_
+- Fabien PHILIP _https://github.com/pwilson77_
