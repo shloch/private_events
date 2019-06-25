@@ -1,18 +1,22 @@
 
     <nav>
-      <ul class="nav navbar-nav navbar-right">
+     
+      <ul class="nav navbar-nav navbar-left">
         <li>
           <% user = current_user()  %>
           <% if user != nil %>           
             <a href="#"> Logged in as <b><%= user.username  %></b> </a>  
           <% end %>
         </li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
              
          <% if current_user() != nil %>
             
-              <li><%= link_to "My_Created_Events", "/users/#{current_user().id}" %> </li> 
-              <li><%= link_to "Creat Event", "/events/new" %>  </li>
+              <li><%= link_to "My_Profile", "/users/#{current_user().id}" %> </li> 
+              <li><%= link_to "Create Event", "/events/new" %>  </li>
               <li><%= link_to "View_all_Events", "/events/index" %></li>
               <li><%= link_to "Log out", logout_path, method: :delete %> </li>
         <% else %>
