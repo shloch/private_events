@@ -43,6 +43,38 @@ The association relationship of these 3 models is shown below:
 
 There's a SESSION_CONTROLLER to manage sessions. Many helper functions to assist the session controller file is found in the **application_controller** file
 
+A rapid glance  of the underlying database is shown below (representation of 'schema.rb' file):
+
+```
+create_table "attended_events_tbls", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "attendee_id"
+    t.integer "attended_event_id"
+    t.index ["attended_event_id"], name: "index_attended_events_tbls_on_attended_event_id"
+    t.index ["attendee_id"], name: "index_attended_events_tbls_on_attendee_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.datetime "eventdate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "creator_id"
+    t.index ["creator_id"], name: "index_events_on_creator_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "string"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "remember_digest"
+  end
+```
 
 ## Contributors
 
