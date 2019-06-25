@@ -2,6 +2,8 @@
 
 Building a site similar to a private *Eventbrite* which allows users to create events and then manage user signups(Event subscriptions). Users can create events and send invitations and parties
 
+A user can create events. A user can attend many events. An event can be attended by many users
+
 ## DESCRIPTION
 
 There're 3 main models for the app's functionality
