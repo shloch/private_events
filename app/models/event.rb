@@ -3,11 +3,18 @@ class Event < ApplicationRecord
     has_many :attendee, through: :attended_events_tbl
     belongs_to :creator, class_name: "User"
 
+    validates :name , presence: true, length: {maximum:50}
+    validates :location, presence: true, length: {maximum:50}
+    validates :eventdate, presence: true
+
+    scope :upcoming_events, -> { select(:name,:id).where("eventdate >= ?", Time.current)}
+    scope :past_events,-> {select(:name,:id).where("eventdate <= ?", Time.current)}
+
     def Event.upcoming
-        Event.select(:name,:id).where("eventdate >= ?", Time.current) 
+        Event.upcoming_events
     end
 
     def Event.past 
-        Event.select(:name,:id).where("eventdate <= ?", Time.current) 
+        Event.past_events 
     end
 end

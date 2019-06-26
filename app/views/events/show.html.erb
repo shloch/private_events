@@ -12,7 +12,7 @@
     <h3>Date : <%= @event.eventdate %></h3>
     <h3><u> Creator : <%= @event.creator.username %> </u></h3>
     <h3> Attendees</h3>
-    <% if not @attendees.nil? %>
+    <% if !@attendees.nil? %>
       <% @attendees.each do |attendee| %>
         <li>
           <%=  attendee.username %>
@@ -20,7 +20,9 @@
       <% end %>
     <% end %>
     <%= link_to attended_events_create_path(:event => @event.id), method: :post do %>
-      <button class="btn btn primary"> Attend this event</button>
+      <% if user_subscribed?(@event.id) %>
+        <button class="btn btn primary"> Attend this event</button>
+      <% end %>
     <%end%>
   </button>
 </a>

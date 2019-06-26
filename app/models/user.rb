@@ -39,12 +39,12 @@ class User < ApplicationRecord
         digest == Digest::SHA1.hexdigest(token)
     end
 
-    def upcoming_events(user)
-        user.attended_events.select(:name).where("eventdate >= ?", Time.current) 
+    def upcoming_events
+        attended_events.select(:name).where("eventdate >= ?", Time.current) 
     end
   
-    def previous_events(user)
-        user.attended_events.select(:name).where("eventdate < ?", Time.current) 
+    def previous_events
+        attended_events.select(:name).where("eventdate < ?", Time.current) 
     end
 
 

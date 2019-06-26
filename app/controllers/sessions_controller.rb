@@ -1,15 +1,14 @@
 class SessionsController < ApplicationController
-    def new
-        
-    end
+    include SessionsHelper
 
-    
-  
+    def new        
+    end
+ 
     def create   
       @user = User.find_by(username: params[:session][:username])
-      if @user 
+      if @user && @user.authenticate(params[:session][:password])
           log_in(@user)
-          current_user()
+          current_user
           params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
           redirect_to root_url
       else

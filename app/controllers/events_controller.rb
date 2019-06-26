@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  include SessionsHelper
   def index
       #@events = Event.all.paginate(page: params[:page])
       @upcoming_events = Event.upcoming
