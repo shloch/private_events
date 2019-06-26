@@ -1,0 +1,17 @@
+<% provide(:title, 'All Events') %>
+<h1>Upcoming Events</h1>
+<ul class="events">
+  <% @upcoming_events.each do |e| %>
+    <li>
+      <%= link_to e.name, "/events/#{e.id}" %>
+    </li>
+  <% end %>
+</ul>
+<h1>Past Events</h1>
+<ul class="events">
+  <% @past_events.each do |e| %>
+    <li>
+      <%= link_to e.name, "/events/#{e.id}" %>
+    </li>
+  <% end %>
+</ul>

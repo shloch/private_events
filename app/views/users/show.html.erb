@@ -1,0 +1,44 @@
+<% provide(:title, "show page") %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= @user.username %>
+      </h1>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if not @upcoming_events.nil? %>
+      <ul class="list-group list-group-flush"><br/>
+        <h3> Upcoming events "(<%= @upcoming_events.count %>)"</h3>
+        <% @upcoming_events.each do |a| %>
+          <li class="list-group-item">
+            <b> <%= a.name %> </b>
+          </li>
+        <% end%>
+      </ul>
+    <% end%>
+    <ul class="list-group list-group-flush">
+      <%if not @prev_events.nil? %><br/>
+        <h3> Previouly attended "(<%= @prev_events.count %>)" events</h3>
+        <% @prev_events.each do |a| %>
+          <li class="list-group-item">
+            <b> <%= a.name %> </b>
+          </li>
+        <% end%>
+      </ul>
+    <% end%>
+  </ul>
+  <% if not @created_events.nil? %><br/>
+    <h3> Created (<%= @created_events.count %>) events</h3>
+    <ul class="list-group list-group-flush">
+      <% @created_events.each do |event| %>
+        <li class="list-group-item">
+          <b> <%= event.name %> </b>
+        </li>
+      <% end %>
+    </ul>
+    <%= will_paginate @created_events %>
+  <% end %>
+</div>
+</div>
