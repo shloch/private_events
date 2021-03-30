@@ -76,6 +76,10 @@ create_table "attended_events_tbls", force: :cascade do |t|
   end
 ```
 
+## ACKNOWLEDGEMENT
+project inspired from
+https://www.theodinproject.com/paths/full-stack-ruby-on-rails/courses/ruby-on-rails/lessons/associations
+
 ## Contributors
 
 - Louis SHEY _https://github.com/shloch_
